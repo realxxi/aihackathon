@@ -1,7 +1,5 @@
 import os
-import json
-import requests
-import numpy as np
+
 from io import BytesIO
 from transformers import ViTImageProcessor, ViTForImageClassification
 from PIL import Image
@@ -9,9 +7,7 @@ import torch
 import telebot
 from telebot import types
 from dotenv import load_dotenv
-import matplotlib.pyplot as plt
 from datetime import datetime
-import time
 import sqlite3
 from contextlib import contextmanager
 
