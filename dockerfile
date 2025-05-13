@@ -1,14 +1,16 @@
-# Python asosida image
-FROM python:3.11-slim
+# Asosiy imejni tanlash
+FROM python:3.9
 
-# Ishchi katalog
+# Ishchi papkani o'rnatish
 WORKDIR /app
 
-# Fayllarni konteynerga o‘tkazish
-COPY . /app
+# Fayllarni ko'chirish
+COPY requirements.txt .
+COPY app.py .
+COPY .env .
 
-# Agar mavjud bo‘lsa, kutubxonalarni o‘rnatish
+# Kerakli kutubxonalarni o'rnatish
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Dasturni ishga tushirish
+# Ilovani ishga tushirish
 CMD ["python", "app.py"]
