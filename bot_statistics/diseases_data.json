@@ -1,0 +1,18 @@
+{
+    "disease_1": {
+        "name_uz": "zang",
+        "name_en": "zang",
+        "name_ru": "zang",
+        "treatment_uz": "jhg",
+        "treatment_en": "yh",
+        "treatment_ru": "jhgf"
+    },
+    "disease_2": {
+        "name_uz": "zang",
+        "name_en": "zang",
+        "name_ru": "zang",
+        "treatment_uz": "jfd",
+        "treatment_en": "fdv",
+        "treatment_ru": "vsd"
+    }
+}
