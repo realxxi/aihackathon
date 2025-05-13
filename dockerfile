@@ -1,13 +1,13 @@
-# Asosiy image
+# Python asosida image
 FROM python:3.11-slim
 
-# Ishchi papkani yaratish va unda ishlash
+# Ishchi katalog
 WORKDIR /app
 
-# Fayllarni konteynerga nusxalash
+# Fayllarni konteynerga o‘tkazish
 COPY . /app
 
-# Talablarni o‘rnatish (agar mavjud bo‘lsa)
+# Agar mavjud bo‘lsa, kutubxonalarni o‘rnatish
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Dasturni ishga tushirish
