@@ -187,61 +187,8 @@ def get_user_stats(user_id):
 
 # Statistika rasmini generatsiya qilish
 def generate_user_statistics_image(user_id):
-    stats = get_user_stats(user_id)
-    if not stats:
-        return None, None
-    
-    lang = get_user_language(user_id)
-    
-    plt.figure(figsize=(12, 8))
-    plt.style.use('ggplot')
-    
-    # Kasalliklar grafigi
-    if stats['diseases']:
-        plt.subplot(1, 2, 1)
-        diseases = [d[0] for d in stats['diseases']]
-        counts = [d[1] for d in stats['diseases']]
-        
-        colors = ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#c2c2f0']
-        plt.bar(range(len(diseases)), counts, color=colors[:len(diseases)])
-        plt.xticks(range(len(diseases)), 
-                  [name[:15] + "..." if len(name) > 15 else name for name in diseases],
-                  rotation=45, ha='right')
-        plt.title(messages[lang]["stats_diseases"], fontweight='bold')
-    
-    # So'rovlar vaqt bo'yicha grafigi
-    plt.subplot(1, 2, 2)
-    with get_db_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute('''
-        SELECT DATE(detected_at) as date, COUNT(*) as count 
-        FROM disease_history 
-        WHERE user_id = ?
-        GROUP BY DATE(detected_at)
-        ORDER BY date DESC
-        LIMIT 7
-        ''', (user_id,))
-        daily_stats = cursor.fetchall()
-    
-    if daily_stats:
-        dates = [row[0] for row in daily_stats]
-        counts = [row[1] for row in daily_stats]
-        plt.plot(dates, counts, marker='o', linestyle='-', color='royalblue')
-        plt.xticks(rotation=45, ha='right')
-        plt.title("Kunlik so'rovlar", fontweight='bold')
-    
-    plt.tight_layout()
-    
-    # Grafik sarlavhasi
-    plt.suptitle(f"{messages[lang]['stats_title']} - {stats['username']}", 
-                fontsize=16, fontweight='bold', y=1.05)
-    
-    # Statistikani saqlash
-    img_path = os.path.join(STATS_DIR, f"stats_{user_id}_{int(time.time())}.png")
-    plt.savefig(img_path, bbox_inches='tight')
-    plt.close()
-    
-    return img_path, stats
+    # Function removed - grafik chizish funksiyasi olib tashlandi
+    return None, None
 
 # Asosiy menyu uchun keyboard yaratish
 def get_main_keyboard(lang, user_id=None):
