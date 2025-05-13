@@ -248,11 +248,10 @@ def get_main_keyboard(lang, user_id=None):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     
     stats_btn = types.KeyboardButton("📊 Statistika")
-    graphs_btn = types.KeyboardButton("📈 Grafiklar")
     help_btn = types.KeyboardButton("❓ Yordam")
     lang_btn = types.KeyboardButton("🌐 Til")
     
-    markup.add(stats_btn, graphs_btn)
+    markup.add(stats_btn)
     markup.add(help_btn, lang_btn)
     
     # Admin uchun qo'shimcha tugmalar
@@ -338,29 +337,6 @@ def show_text_stats(message):
                 stats_text += f"- {translated_disease}: {count}\n"
         
         bot.reply_to(message, stats_text)
-        
-    except Exception as e:
-        bot.reply_to(message, f"Xatolik yuz berdi: {str(e)}")
-
-@bot.message_handler(func=lambda message: message.text == "📈 Grafiklar")
-def show_graph_stats(message):
-    lang = get_user_language(message.chat.id)
-    try:
-        img_path, stats = generate_user_statistics_image(message.chat.id)
-        if not stats:
-            bot.reply_to(message, "Statistika mavjud emas.")
-            return
-        
-        # Grafik yuborish
-        with open(img_path, 'rb') as photo:
-            bot.send_photo(
-                message.chat.id,
-                photo,
-                caption=f"{messages[lang]['stats_title']} - {stats['username']}"
-            )
-        
-        # Vaqtinchalik rasmni o'chirish
-        os.remove(img_path)
         
     except Exception as e:
         bot.reply_to(message, f"Xatolik yuz berdi: {str(e)}")
